@@ -15,6 +15,7 @@ call plug#end()
 
 set number
 set background=dark
+colorscheme dim
 
 " CtrlP
 " allow more matches; default is:
