@@ -1,0 +1,74 @@
+call plug#begin('~/.vim/plugged')
+
+" The below plugins are GitHub repos
+Plug 'scrooloose/nerdtree'
+Plug 't9md/vim-choosewin'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-scripts/ZoomWin'
+Plug 'ctrlpvim/ctrlp.vim'
+
+" plug#end() will automatically execute:
+"   filetype plugin indent on
+"   syntax on
+call plug#end()
+
+set number
+set background=dark
+
+" CtrlP
+" allow more matches; default is:
+" let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:10'
+let g:ctrlp_match_window = 'results:50'
+
+" Choosewin
+" invoke with '-'
+"nmap  -  <Plug>(choosewin)
+nmap  _  <Plug>(choosewin)
+let g:choosewin_blink_on_land = 0
+"let g:choosewin_overlay_enable = 1
+" Tmux style window selection
+"map <Leader>ws :ChooseWin<cr>
+
+" NERDTree
+map <C-n> :NERDTreeToggle<CR>
+
+" Put new window on right of horizontal split
+set splitright
+
+" Put new window below existing in vertical split
+set splitbelow
+
+" This function changes the way the tabline is rendered,
+if exists("+showtabline")
+     function MyTabLine()
+         let s = ''
+         let t = tabpagenr()
+         let i = 1
+         while i <= tabpagenr('$')
+             let buflist = tabpagebuflist(i)
+             let winnr = tabpagewinnr(i)
+             let s .= '%' . i . 'T'
+             let s .= (i == t ? '%1*' : '%2*')
+             "let s .= ' '
+             "let s .= i . ':'
+             "let s .= ' %*'
+             let s .= '%*'
+             let s .= (i == t ? '%#TabLineSel#' : '%#TabLine#')
+             let s .= '[ '. i . ':'
+             let file = bufname(buflist[winnr - 1])
+             let file = fnamemodify(file, ':p:t')
+             if file == ''
+                 let file = '[No Name]'
+             endif
+             let s .= file
+             let s .= ' ]'
+             let i = i + 1
+         endwhile
+         let s .= '%T%#TabLineFill#%='
+         let s .= (tabpagenr('$') > 1 ? '%999XX' : 'X')
+         return s
+     endfunction
+     set stal=2
+     set tabline=%!MyTabLine()
+endif
+
