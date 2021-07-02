@@ -1,0 +1,28 @@
+set -g default-terminal "screen-256color"                        
+                                                                 
+# Change prefix to C-a                                           
+set -g prefix C-a                                                
+unbind C-b                                                       
+bind C-a send-prefix                                             
+                                                                 
+# vi like key binding                                            
+set-window-option -g mode-keys vi                                
+bind h select-pane -L                                            
+bind j select-pane -D                                            
+bind k select-pane -U                                            
+bind l select-pane -R                                            
+                                                                 
+# history-limit                                                  
+set -g history-limit 1000000                                     
+set -g buffer-limit 20                                           
+                                                                 
+# kill pane                                                      
+bind ^K confirm-before kill-pane                                 
+                                                                 
+# set the timeout for displaying times to more convinient amount 
+set -g display-panes-time 1000                                   
+                                                                 
+#vim-like copy mode                                              
+bind Escape copy-mode                                            
+unbind p                                                         
+bind p paste-buffer                                              
