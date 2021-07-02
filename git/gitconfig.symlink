@@ -1,0 +1,26 @@
+[color]
+        ui = auto
+[user]
+        email = ecarrillo@alumni.utexas.net
+        name = Erik Gabriel Carrillo
+[alias]
+        hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+        lga = log --graph --decorate --pretty=oneline --all --abbrev-commit
+        lg = log --graph --decorate --pretty=oneline --abbrev-commit
+        l = log --decorate --pretty=oneline --abbrev-commit
+        st = status
+        unstage = reset HEAD --
+        last = log -1 HEAD
+        ci = commit
+        show-files = diff-tree --no-commit-id --name-only -r
+        whatadded = log --diff-filter=A
+        shorthash = rev-parse --short
+        log-files = log --pretty=format:"[%h] %ae, %ar: %s" --stat
+        fixline = log -1 --abbrev=12 --format='Fixes: %h (\"%s\")%nCc: %ae'
+        see-also = log -1 --abbrev=12 --format='See-also: %h (\"%s\")'
+        alias = config --get-regexp alias
+        parent = "!(git show -s --pretty=medium; echo \"\"; echo -n \"Branch: \"; branch=$(git rev-parse --abbrev-ref HEAD); if [ \"$branch\" = \"HEAD\" ]; then echo \"Detached\"; else echo $branch; fi)"
+        curbranch = "!(branch=$(git rev-parse --abbrev-ref HEAD); if [ \"$branch\" = \"HEAD\" ]; then echo \"Detached\"; else echo $branch; fi)"
+        cb = "!(branch=$(git rev-parse --abbrev-ref HEAD); if [ \"$branch\" = \"HEAD\" ]; then echo \"Detached\"; else echo $branch; fi)"
+        co = checkout
+        br = branch
