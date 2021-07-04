@@ -1,12 +1,14 @@
 call plug#begin('~/.vim/plugged')
 
-" The below plugins are GitHub repos
 Plug 'scrooloose/nerdtree'
 Plug 't9md/vim-choosewin'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/ZoomWin'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'mileszs/ack.vim'
+" some color schemes
 Plug 'jeffkreeftmeijer/vim-dim'
+Plug 'gruvbox-community/gruvbox'
 
 " plug#end() will automatically execute:
 "   filetype plugin indent on
@@ -39,6 +41,9 @@ set splitright
 
 " Put new window below existing in vertical split
 set splitbelow
+
+" Use ag for ack
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " This function changes the way the tabline is rendered,
 if exists("+showtabline")
@@ -73,4 +78,10 @@ if exists("+showtabline")
      set stal=2
      set tabline=%!MyTabLine()
 endif
+
+fun! TrimWhitespace()
+   let l:save = winsaveview()
+   keeppatterns %s/\s\+$//e
+   call winrestview(l:save)
+endfun
 
